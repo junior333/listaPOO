@@ -33,15 +33,15 @@ public class Banco {
 		case 1:
 			setDono("");
 			setNumConta(0);
-			depositar(150.00f);
-			setTipo("conta poupanca");
+			this.saldo=150;
+			setTipo("cc");
 			setStatus(true);
 			break;
 		case 2:
 			setDono("");
 			setNumConta(0);
-			depositar(50.00f);
-			setTipo("conta corrente");
+			this.saldo=50;
+			setTipo("cp");
 			setStatus(true);
 			break;
 		default:
@@ -50,39 +50,41 @@ public class Banco {
 	}
 
 	public void fecharConta() {
-		if(getSaldo()==0) {
+		if (getSaldo() == 0) {
 			status = false;
-		}
-		else {
-			System.out.println("NÃO FOI POSSIVEL FECHAR A CONTA\nVERIFIQUE O SEU SALDO");
+		} else {
+			System.out.println("NÃO FOI POSSIVEL FECHAR A CONTA\nVERIFIQUE SE HÁ DEBITOS OU SALDO NA SUA CONTA");
 		}
 	}
 
 	public void depositar(float valor) {
-		if(isStatus()==true) {
-		this.saldo += valor;
-		}
-		else {
+		if (isStatus() == true) {
+			setSaldo(getSaldo()+valor);
+		} else {
 			System.out.println("SUA CONTA ESTÁ ENCERRADA");
 		}
 	}
 
 	public void sacar(float valor) {
-		if(isStatus()==true){
-		this.saldo -= valor;
-		}
-		else {
+		if (isStatus() == true) {
+			setSaldo(getSaldo()-valor);
+		} else {
 			System.out.println("SUA CONTA ESTÁ ENCERRADA");
 		}
 	}
 
-	public void pagarMensal(float mensal) {
-		if(isStatus()==true){
+	public void pagarMensal() {
+		int mensal;
+		if (isStatus() == true) {
+			if (tipo == "cc") {
+				mensal = 12;
+			} else {
+				mensal = 20;
+			}
 			this.saldo -= mensal;
-			}
-			else {
-				System.out.println("SUA CONTA ESTÁ ENCERRADA");
-			}
+		} else {
+			System.out.println("SUA CONTA ESTÁ ENCERRADA");
+		}
 	}
 
 	public int getNumConta() {
@@ -90,7 +92,7 @@ public class Banco {
 	}
 
 	public void setNumConta(int numConta) {
-		numConta=(int)(Math.random()*9999);
+		numConta = (int) (Math.random() * 9999);
 		this.numConta = numConta;
 	}
 
@@ -107,7 +109,7 @@ public class Banco {
 	}
 
 	public void setDono(String dono) {
-		dono=JOptionPane.showInputDialog("digite o nome do Dono: ");
+		dono = JOptionPane.showInputDialog("digite o nome do Dono: ");
 		this.dono = dono;
 	}
 
@@ -115,7 +117,7 @@ public class Banco {
 		return saldo;
 	}
 
-	public void setSaldo(float saldo) {
+	private void setSaldo(float saldo) {
 		this.saldo = saldo;
 	}
 
@@ -126,8 +128,9 @@ public class Banco {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
+
 	public void status() {
-		System.out.println("Dono: "+getDono()+"\nN°Conta: "+getNumConta()+"\nTipo: "+getTipo()+"\nSaldo: "+getSaldo()+"\nStatus: "+isStatus());
+		System.out.println("Dono: " + getDono() + "\nN°Conta: " + getNumConta() + "\nTipo: " + getTipo() + "\nSaldo: "
+				+ getSaldo() + "\nStatus: " + isStatus());
 	}
 }
