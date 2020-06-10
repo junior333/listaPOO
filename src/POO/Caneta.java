@@ -15,9 +15,9 @@ public class Caneta {
 	}
 
 	public void status() {
-		System.out.println("Uma caneta: " + this.getModelo() + " Cor: " + this.getCor());
+		System.out.println("Uma caneta: " + this.getModelo() + " Cor: " + getCor());
 		System.out.println("está tampada: " + this.tampada);
-//		System.out.println("tamanho da ponta: "+this.ponta);
+		System.out.println("tamanho da ponta: "+this.ponta);
 //		System.out.println("tamanho da carga: "+this.carga);
 	}
 
@@ -45,7 +45,7 @@ public class Caneta {
 		this.modelo = m;
 	}
 
-	public String getCor() {
+	private String getCor() {
 		return this.cor;
 	}
 
